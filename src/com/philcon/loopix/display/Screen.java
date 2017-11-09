@@ -1,11 +1,8 @@
 package com.philcon.loopix.display;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.image.BufferStrategy;
 
 /**
  * Draw-Klasse, zeichnet das Bild
@@ -30,10 +27,13 @@ public class Screen extends JFrame{
 	
 	@Override
 	public void paint(Graphics g) {
+		
+		createBufferStrategy(3);
+		BufferStrategy bs = getBufferStrategy();
+		g = bs.getDrawGraphics();
+		
 		do {
-			
 			int i = -1;
-			
 			
 			for(int y = 0; y < height; y++) {
 				for(int x = 0; x < width; x++) {
@@ -43,17 +43,14 @@ public class Screen extends JFrame{
 				}
 			}
 			
-			
+			bs.show();
 			
 			int[] savedCol = new int[height];
 			savedCol = saveLeftCol(savedCol);
 			shiftPixelsToLeft();
 			fillRightCol(savedCol);	
 			
-			
-		}while(true);
-		
-		
+		}while(true);	
 	}
 	
 	
