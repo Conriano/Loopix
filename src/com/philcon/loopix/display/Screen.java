@@ -8,11 +8,17 @@ import java.awt.image.BufferStrategy;
  * Draw-Klasse, zeichnet das Bild
  */
 public class Screen extends JFrame{
+
 	private int[] pixel;
 	private int width;
 	private int height;
 	
-	
+	/**
+	 * Erstell anhand der Width und Height eines Bildes ein JFrame
+	 * @param pixel ist ein int-Array der Groesse Width*Height
+	 * @param width ist die Breite des Bildes
+	 * @param height ist die Hoehe des Bildes
+	 */
 	public Screen(int[] pixel, int width, int height) {	
 		setSize(width, height);
 		setLocationRelativeTo(null);
@@ -25,6 +31,10 @@ public class Screen extends JFrame{
         setVisible(true);
 	}
 	
+	/**
+	 * ist die von setVisible aufgerufene Zeichnen-Funktion
+	 * @param g ist das implizite Grafik-Objekt, mit dem gezeichnet werden kann
+	 */
 	@Override
 	public void paint(Graphics g) {
 		
@@ -56,8 +66,8 @@ public class Screen extends JFrame{
 	
 	/**
 	 * Speichert die rechte Pixel-Spalte des Hintergrundbildes
-	 * @param firstCol the first col
-	 * @return the int[]
+	 * @param firstCol ist die erste Spalte des Arrays
+	 * @return the int[] ist das neue Array
 	 */
 	private int[] saveLeftCol(int[] firstCol){
 		for(int i = 0; i < height; i++){

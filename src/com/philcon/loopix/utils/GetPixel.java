@@ -4,6 +4,11 @@ import java.awt.image.BufferedImage;
 
 public class GetPixel {
 
+	/**
+	 * transformiert ein zeilenweise eingelesenes Bild in ein pixel-Array mit entsprechenden RGB-Werten
+	 * @param img ist das Bild
+	 * @return ist das pixel-Array
+	 */
 	public static int[] getPixelArray(BufferedImage img) {
 			
 		int width = img.getWidth();
