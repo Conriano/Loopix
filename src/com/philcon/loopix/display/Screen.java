@@ -1,11 +1,15 @@
 package com.philcon.loopix.display;
 
 import javax.swing.*;
+
+import com.philcon.loopix.utils.GetPixel;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 /**
- * Draw-Klasse, zeichnet das Bild
+ * Screen-Klasse, zeichnet das Bild
  */
 public class Screen extends JFrame{
 
@@ -14,20 +18,28 @@ public class Screen extends JFrame{
 	private int height;
 	
 	/**
-	 * Erstell anhand der Width und Height eines Bildes ein JFrame
-	 * @param pixel ist ein int-Array der Groesse Width*Height
-	 * @param width ist die Breite des Bildes
-	 * @param height ist die Hoehe des Bildes
+	 * Erstellt anhand der Width und Height eines Bildes ein JFrame
+	 * @param img ist das Bild
 	 */
-	public Screen(int[] pixel, int width, int height) {	
+	public Screen(BufferedImage img) {	
+		this.width = img.getWidth();
+		this.height = img.getHeight();
+		this.pixel = new int[width * height];
+		
+		initFrame();
+		pixel = GetPixel.getPixelArray(img);
+	}
+	
+	
+	/**
+	 * initialisiert das JFrame
+	 */
+	private void initFrame() {
 		setSize(width, height);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Loopix");
         setResizable(false);
-        this.pixel = pixel;
-        this.width = width;
-        this.height = height;
         setVisible(true);
 	}
 	
