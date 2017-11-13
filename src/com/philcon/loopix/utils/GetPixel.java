@@ -7,12 +7,12 @@ public class GetPixel {
 	/**
 	 * transformiert ein zeilenweise eingelesenes Bild in ein pixel-Array mit entsprechenden RGB-Werten
 	 * @param img ist das Bild
+	 * @param width ist die Breite des Bildes
+	 * @param height ist die Hoehe des Bildes
 	 * @return ist das pixel-Array
 	 */
-	public static int[] getPixelArray(BufferedImage img) {
+	public static int[] getPixelArray(BufferedImage img, int width, int height) {
 			
-		int width = img.getWidth();
-		int height = img.getHeight();
 		int[] pixels = new int[width * height];
 		int z = 0;
 		

@@ -1,11 +1,8 @@
 package com.philcon.loopix;
 
 import java.awt.image.BufferedImage;
-
 import com.philcon.loopix.display.Screen;
 import com.philcon.loopix.loader.ResourceLoader;
-import com.philcon.loopix.utils.GetPixel;
-
 
 /**
  * Loopix - Loop your picture!
@@ -20,6 +17,8 @@ public class Launcher {
 	 * @param args 
 	 */
 	public static void main(String[] args) {
+		
+		//die Zeile kommt raus, sobald die GUI steht
 		BufferedImage img = ResourceLoader.getImage("test2.png");
 		Screen screen = new Screen(img);
 	}

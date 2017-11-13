@@ -4,7 +4,10 @@ import javax.swing.*;
 
 import com.philcon.loopix.utils.GetPixel;
 
-import java.awt.*;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -16,6 +19,7 @@ public class Screen extends JFrame{
 	private int[] pixel;
 	private int width;
 	private int height;
+	private Canvas canvas;
 	
 	/**
 	 * Erstellt anhand der Width und Height eines Bildes ein JFrame
@@ -24,17 +28,26 @@ public class Screen extends JFrame{
 	public Screen(BufferedImage img) {	
 		this.width = img.getWidth();
 		this.height = img.getHeight();
-		this.pixel = new int[width * height];
-		
-		initFrame();
-		pixel = GetPixel.getPixelArray(img);
+		this.pixel = GetPixel.getPixelArray(img, width, height);
+		initFrame(width, height);
+		initCanvas();
+		pack();
+	}
+	
+	
+	private void initCanvas() {
+		canvas = new Canvas();
+		Dimension d = new Dimension(width, height);
+		canvas.setBounds(0, 0, width, height );
+		canvas.setPreferredSize(d);
+		add(canvas);
 	}
 	
 	
 	/**
 	 * initialisiert das JFrame
 	 */
-	private void initFrame() {
+	private void initFrame(int width, int height) {
 		setSize(width, height);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,8 +63,8 @@ public class Screen extends JFrame{
 	@Override
 	public void paint(Graphics g) {
 		
-		createBufferStrategy(3);
-		BufferStrategy bs = getBufferStrategy();
+		canvas.createBufferStrategy(3);
+		BufferStrategy bs = canvas.getBufferStrategy();
 		g = bs.getDrawGraphics();
 		
 		do {
@@ -65,12 +78,14 @@ public class Screen extends JFrame{
 				}
 			}
 			
-			bs.show();
 			
 			int[] savedCol = new int[height];
 			savedCol = saveLeftCol(savedCol);
 			shiftPixelsToLeft();
 			fillRightCol(savedCol);	
+			
+			bs.show();
+			
 			
 		}while(true);	
 	}
