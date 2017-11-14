@@ -73,7 +73,7 @@ public class Screen extends JFrame{
 	@Override
 	public void paint(Graphics g) {
 
-		canvas.createBufferStrategy(2);
+		canvas.createBufferStrategy(3);
 		BufferStrategy bs = canvas.getBufferStrategy();
 		g = bs.getDrawGraphics();
 		
