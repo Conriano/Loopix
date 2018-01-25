@@ -2,7 +2,6 @@ package com.philcon.loopix.display;
 
 import javax.swing.*;
 
-import com.philcon.loopix.input.KeyManager;
 import com.philcon.loopix.utils.GetPixel;
 
 import java.awt.Canvas;
@@ -20,25 +19,18 @@ public class Screen extends JFrame{
 	private int[] pixel;
 	private int width;
 	private int height;
-	public static boolean close = false;
 	private Canvas canvas;
-	private KeyManager keyManager;
-
 	
 	/**
 	 * Erstellt anhand der Width und Height eines Bildes ein JFrame
 	 * @param img ist das Bild
 	 */
 	public Screen(BufferedImage img) {	
-		width = img.getWidth();
-		height = img.getHeight();
-		pixel = GetPixel.getPixelArray(img, width, height);
-		initCanvas();
+		this.width = img.getWidth();
+		this.height = img.getHeight();
+		this.pixel = GetPixel.getPixelArray(img, width, height);
 		initFrame(width, height);
-		
-		keyManager = new KeyManager();
-        addKeyListener(keyManager);
-        
+		initCanvas();
 		pack();
 	}
 	
@@ -48,7 +40,6 @@ public class Screen extends JFrame{
 		Dimension d = new Dimension(width, height);
 		canvas.setBounds(0, 0, width, height );
 		canvas.setPreferredSize(d);
-		canvas.setFocusable(false);
 		add(canvas);
 	}
 	
@@ -61,7 +52,6 @@ public class Screen extends JFrame{
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Loopix");
-        setFocusable(true);
         setResizable(false);
         setVisible(true);
 	}
@@ -72,12 +62,14 @@ public class Screen extends JFrame{
 	 */
 	@Override
 	public void paint(Graphics g) {
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> parent of 7101c09... setVisible umgestellt, dadurch wird eine IllegalStateException vermieden
 		canvas.createBufferStrategy(3);
 		BufferStrategy bs = canvas.getBufferStrategy();
 		g = bs.getDrawGraphics();
-		
-		int[] savedCol = new int[height];
 		
 		do {
 			int i = -1;
@@ -91,12 +83,13 @@ public class Screen extends JFrame{
 			}
 			
 			
+			int[] savedCol = new int[height];
 			savedCol = saveLeftCol(savedCol);
 			shiftPixelsToLeft();
 			fillRightCol(savedCol);	
 			
 			bs.show();
-
+			
 			
 		}while(true);	
 	}
@@ -148,5 +141,6 @@ public class Screen extends JFrame{
 		}while(y < pixel.length);
 	}
 	
-
+	
+	
 }
